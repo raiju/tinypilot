@@ -19,6 +19,12 @@
       <div class="navbar">
         <p class="brand">TinyPilot</p>
         <div class="nav-items">
+          <div class="nav-item screen-size">
+            <span>Screen size</span>
+            <input type="text" id="screen-size-x" value="1920" />
+            <span>x</span>
+            <input type="text" id="screen-size-y" value="1080" />
+          </div>
           <div class="nav-item fullscreen">
             <button id="fullscreen-btn">Fullscreen</button>
           </div>
@@ -79,7 +85,9 @@
           <button id="cancel-shutdown" class="btn" type="button">Cancel</button>
         </div>
         <div id="remote-screen">
-          <img id="remote-screen-img" src="/stream?advance_headers=1" />
+          <div id="remote-screen-sizer">
+            <img id="remote-screen-img" src="/stream?advance_headers=1" />
+          </div>
         </div>
         <div id="keystroke-history" class="container">
           <div id="recent-keys"></div>

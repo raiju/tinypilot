@@ -19,7 +19,8 @@ h1,
 h2,
 h3,
 h4,
-.brand {
+.brand,
+.navbar {
   font-family: Nunito;
 }
 
@@ -66,6 +67,14 @@ img {
 
 .navbar .nav-item {
   margin-left: 1.5rem;
+}
+
+.navbar .screen-size input {
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  width: 4em;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .nav-icon img {
@@ -145,17 +154,28 @@ button:active {
 }
 
 #remote-screen {
-  max-width: 85%;
-  max-height: 1080px;
+  width: 1920px;
+  max-width: 85%; /* Keep for back-compat */
+  max-width: 85vw;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
+#remote-screen-sizer {
+  width: 100%;
+  padding-top: 56.25%; /* Default to 1920/1080 * 100 */
+  position: relative;
+}
 #remote-screen img {
   width: 100%;
+  height: 100%;
   cursor: crosshair;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .keyboard-status {

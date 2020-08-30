@@ -309,6 +309,19 @@ function emitMouseEvent(domTarget, position, buttons) {
   });
 }
 
+function configureScreenSize(evt) {
+  if (evt !== undefined) {
+    evt.stopPropagation();
+  }
+
+  const target =
+    document.getElementById("screen-size-x").value /
+    document.getElementById("screen-size-y").value;
+
+  const sizer = document.getElementById("remote-screen-sizer");
+  sizer.style.paddingTop = 100 / target + "%";
+}
+
 function onKeyUp(evt) {
   keyState[evt.keyCode] = false;
   if (!connectedToServer) {
@@ -365,6 +378,14 @@ document.getElementById("fullscreen-btn").addEventListener("click", () => {
 document.getElementById("hide-error-btn").addEventListener("click", () => {
   hideElementById("error-panel");
 });
+["change", "keyup", "keydown"].forEach(function (event) {
+  document
+    .getElementById("screen-size-x")
+    .addEventListener(event, configureScreenSize);
+  document
+    .getElementById("screen-size-y")
+    .addEventListener(event, configureScreenSize);
+});
 document
   .getElementById("confirm-shutdown")
   .addEventListener("click", function () {
@@ -385,4 +406,9 @@ socket.on("connect", onSocketConnect);
 socket.on("disconnect", onSocketDisconnect);
 socket.on("keystroke-received", (keystrokeResult) => {
   updateKeyStatus(keystrokeResult.keystrokeId, keystrokeResult.success);
+});
+
+window.addEventListener("load", function () {
+  // The browser automatically remembers input values ~> reload them
+  configureScreenSize();
 });
